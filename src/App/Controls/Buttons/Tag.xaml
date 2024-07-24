@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="App.Controls.Buttons.Tag"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:stateButton="clr-namespace:IeuanWalker.Maui.StateButton;assembly=IeuanWalker.Maui.StateButton">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <stateButton:StateButton Margin="5"
+                                     Padding="15,5"
+                                     AutomationProperties.HelpText="{TemplateBinding AccessibilityHelpText}"
+                                     AutomationProperties.IsInAccessibleTree="true"
+                                     AutomationProperties.Name="{TemplateBinding Text}"
+                                     BackgroundColor="{DynamicResource PrimaryBackgroundColour}"
+                                     Clicked="StateButton_Clicked"
+                                     Stroke="{DynamicResource BackgroundGradientEndColor}"
+                                     StrokeThickness="2">
+                <stateButton:StateButton.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </stateButton:StateButton.StrokeShape>
+                <stateButton:StateButton.Triggers>
+                    <Trigger TargetType="stateButton:StateButton" Property="State" Value="Pressed">
+                        <Setter Property="Stroke" Value="{DynamicResource AccentColour}" />
+                    </Trigger>
+                </stateButton:StateButton.Triggers>
+
+                <stateButton:StateButton.Content>
+                    <Label FontFamily="InterRegular"
+                           FontSize="Small"
+                           HorizontalTextAlignment="Center"
+                           Text="{TemplateBinding Text}"
+                           TextColor="{DynamicResource TextSecondaryColour}"
+                           VerticalTextAlignment="Center" />
+                </stateButton:StateButton.Content>
+            </stateButton:StateButton>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

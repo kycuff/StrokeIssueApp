@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="App.Routes.HomePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:App.Controls.Buttons;assembly=App"
+             xmlns:resx="clr-namespace:App.Resources.Languages;assembly=App"
+             Title="{resx:Translate PageTitleHome}"
+             BackgroundColor="{DynamicResource PrimaryBackgroundColour}"
+             HideSoftInputOnTapped="True"
+             NavigationPage.HasNavigationBar="False">
+    <VerticalStackLayout Margin="{StaticResource FormMargins}" VerticalOptions="Center">
+        <!-- switch -->
+        <Switch x:Name="themeSwitch"
+                IsToggled="False"
+                OnColor="{DynamicResource AccentColour}"
+                Toggled="Switch_Toggled" />
+        
+        <!-- Tag -->
+        <buttons:Tag Text="Test tag" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="App.Controls.Buttons.Close"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:stateButton="clr-namespace:IeuanWalker.Maui.StateButton;assembly=IeuanWalker.Maui.StateButton"
+             xmlns:styles="clr-namespace:App.Resources.Styles;assembly=App">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+            <stateButton:StateButton Padding="5"
+                                     Clicked="BtnClose_Clicked"
+                                     HeightRequest="40"
+                                     StrokeThickness="0"
+                                     WidthRequest="40">
+                <stateButton:StateButton.Background>
+                    <SolidColorBrush Color="{DynamicResource AccentColour}" />
+                </stateButton:StateButton.Background>
+                <stateButton:StateButton.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </stateButton:StateButton.StrokeShape>
+                <Label FontFamily="FontAwesomeLight"
+                       FontSize="15"
+                       HorizontalTextAlignment="Center"
+                       Text="{x:Static styles:IconFont.Close}"
+                       TextColor="{DynamicResource TextButtonColour}"
+                       VerticalTextAlignment="Center" />
+            </stateButton:StateButton>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

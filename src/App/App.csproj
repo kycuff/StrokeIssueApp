@@ -1,0 +1,111 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<OutputType>Exe</OutputType>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<NeutralLanguage>en-GB</NeutralLanguage>
+		<RootNamespace>App</RootNamespace>
+		
+		<!-- Display name -->
+		<ApplicationTitle>Cardiff Gov</ApplicationTitle>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#053C3D" Resize="True" ForegroundScale="0.45" BaseSize="400,467" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#053C3D" Resize="True" BaseSize="109.64,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+	
+	<!-- Android specific settings -->
+	<PropertyGroup Condition="$(TargetFramework.Contains('-android'))">
+		<ApplicationId>uk.gov.cardiff.CardiffGov.Android</ApplicationId>
+	</PropertyGroup>
+	<ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+		<GoogleServicesJson Include="Platforms\Android\google-services.json" />
+	</ItemGroup>
+
+	<!-- iOS specific settings -->
+	<PropertyGroup Condition="$(TargetFramework.Contains('-ios'))">
+		<ApplicationId>uk.gov.cardiff.CardiffGov</ApplicationId>
+	</PropertyGroup>
+	<ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+		<CustomEntitlements Include="aps-environment" Type="string" Value="development" Condition="'$(Configuration)' == 'Debug'" />
+		<CustomEntitlements Include="aps-environment" Type="string" Value="production" Condition="'$(Configuration)' == 'Release'" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Resources\Fonts\Inter-Regular.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiImage Update="Resources\Images\cardiff_logo.svg">
+			<Resize>True</Resize>
+			<Color>#053C3D</Color>
+			<BaseSize>400,467</BaseSize>
+		</MauiImage>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.1" />
+		<PackageReference Include="IeuanWalker.Maui.StateButton" Version="1.1.1" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.61" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.61" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Languages\AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Resources\Languages\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiXaml Update="Controls\Buttons\Tag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Controls\ErrorLabel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="Controls\Input\Picker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\Sections\" />
+  </ItemGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
+		<ProvisioningType>manual</ProvisioningType>
+		<CodesignKey>Apple Development: Ieuan Walker (R4SVVV33HW)</CodesignKey>
+		<CodesignProvision>CardiffGov-Developement</CodesignProvision>
+	</PropertyGroup>
+
+</Project>

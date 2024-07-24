@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="App.Controls.Inputs.Picker"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:App.Controls"
+             xmlns:inputs="clr-namespace:App.Controls.Inputs"
+             xmlns:stateButton="clr-namespace:IeuanWalker.Maui.StateButton;assembly=IeuanWalker.Maui.StateButton"
+             xmlns:styles="clr-namespace:App.Resources.Styles;assembly=App"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="this"
+             Margin="0">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid RowDefinitions="auto,auto,auto" RowSpacing="5">
+        <Label Grid.Row="0"
+               IsVisible="False"
+               Style="{DynamicResource TextBody}"
+               Text="{Binding Title, Source={RelativeSource AncestorType={x:Type ContentView}}}"
+               TextColor="{DynamicResource TextSilverColour}">
+            <Label.Triggers>
+                <MultiTrigger TargetType="Label">
+                    <MultiTrigger.Conditions>
+                        <BindingCondition Binding="{Binding Title, Source={x:Reference this}, Converter={StaticResource IsNotNullConverter}}" Value="true" />
+                        <BindingCondition Binding="{Binding ShowTitleLabel, Source={x:Reference this}}" Value="true" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="IsVisible" Value="True" />
+                </MultiTrigger>
+            </Label.Triggers>
+        </Label>
+        <Border x:Name="PickerBorder"
+                Grid.Row="1"
+                BackgroundColor="{DynamicResource InputFieldColour}"
+                Stroke="{DynamicResource UnfocusedColour}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+            </Border.StrokeShape>
+            <Border.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="10,15" />
+                    <On Platform="Android" Value="10,5" />
+                </OnPlatform>
+            </Border.Padding>
+            <Grid ColumnDefinitions="*,20" ColumnSpacing="10">
+                <Picker x:Name="PickerControl"
+                        Title="{Binding Title, Source={x:Reference this}}"
+                        Grid.Column="0"
+                        FontSize="Small"
+                        IsEnabled="{Binding IsEnabledPicker, Source={x:Reference this}}"
+                        ItemsSource="{Binding ItemsSource, Source={x:Reference this}}"
+                        SelectedIndex="{Binding SelectedIndex, Source={x:Reference this}}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged"
+                        SelectedItem="{Binding SelectedItem, Source={x:Reference this}}"
+                        TextColor="{DynamicResource TextSilverColour}"
+                        TitleColor="{DynamicResource TextSilverColour}" />
+
+                <Label Grid.Column="1"
+                       FontAutoScalingEnabled="False"
+                       FontFamily="FontAwesomeRegular"
+                       FontSize="16"
+                       Text="{x:Static styles:IconFont.ChevronDown}"
+                       TextColor="{DynamicResource TextAccentColour}"
+                       VerticalTextAlignment="Center">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Border>
+        <controls:ErrorLabel Grid.Row="2"
+                             ErrorName="{Binding Title, Source={x:Reference this}}"
+                             Errors="{Binding Errors, Source={x:Reference this}}" />
+    </Grid>
+</ContentView>
