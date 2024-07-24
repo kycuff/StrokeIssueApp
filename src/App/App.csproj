@@ -90,16 +90,6 @@
     <MauiXaml Update="Controls\Buttons\Tag.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="Controls\ErrorLabel.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="Controls\Input\Picker.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controls\Sections\" />
   </ItemGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">

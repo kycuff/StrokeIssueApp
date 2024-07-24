@@ -8,9 +8,4 @@ public partial class HomePage : ContentPage
 	{
 		InitializeComponent();
 	}
-
-	void Switch_Toggled(object sender, ToggledEventArgs e)
-	{
-		Application.Current!.Resources = themeSwitch.IsToggled ? new DarkTheme() : new LightTheme();
-	}
 }

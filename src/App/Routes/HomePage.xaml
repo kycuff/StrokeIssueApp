@@ -9,12 +9,6 @@
              HideSoftInputOnTapped="True"
              NavigationPage.HasNavigationBar="False">
     <VerticalStackLayout Margin="{StaticResource FormMargins}" VerticalOptions="Center">
-        <!-- switch -->
-        <Switch x:Name="themeSwitch"
-                IsToggled="False"
-                OnColor="{DynamicResource AccentColour}"
-                Toggled="Switch_Toggled" />
-        
         <!-- Tag -->
         <buttons:Tag Text="Test tag" />
     </VerticalStackLayout>
